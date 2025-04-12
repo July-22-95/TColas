@@ -1,0 +1,165 @@
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Metodos {
+
+    // ---------------- MÉTODOS TABLET ----------------
+
+    public Queue<ObjTablet> agregarTablets(Queue<ObjTablet> cola, Scanner sc) {
+        System.out.print("¿Cuántas tablets deseas agregar? ");
+        int n = sc.nextInt(); sc.nextLine();
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nTablet #" + (i + 1));
+            System.out.print("Serial: ");
+            String serial = sc.nextLine();
+            System.out.print("Tamaño: ");
+            String tamaño = sc.nextLine();
+            System.out.print("Marca: ");
+            String marca = sc.nextLine();
+            System.out.print("Precio: ");
+            double precio = sc.nextDouble(); sc.nextLine();
+            System.out.print("Nombre del estudiante: ");
+            String nombre = sc.nextLine();
+            System.out.print("¿Disponible? (true/false): ");
+            boolean disponible = sc.nextBoolean(); sc.nextLine();
+
+            ObjTablet t = new ObjTablet(serial, tamaño, marca, precio, nombre, disponible);
+            cola.add(t);
+        }
+        return cola;
+    }
+
+    public void mostrarTablets(Queue<ObjTablet> cola) {
+        if (cola.isEmpty()) {
+            System.out.println("No hay tablets registradas.");
+        } else {
+            for (ObjTablet t : cola) {
+                System.out.println("Serial: " + t.getSerial());
+                System.out.println("Tamaño: " + t.getTamaño());
+                System.out.println("Marca: " + t.getMarca());
+                System.out.println("Precio: $" + t.getPrecio());
+                System.out.println("Estudiante: " + t.getNombreEstudiante());
+                System.out.println("Disponible: " + t.isDisponible());
+                System.out.println("---------------------------");
+            }
+        }
+    }
+
+    public void prestarTablet(Queue<ObjTablet> cola, Scanner sc) {
+        System.out.print("Serial de la tablet a prestar: ");
+        String serial = sc.nextLine();
+        for (ObjTablet t : cola) {
+            if (t.getSerial().equalsIgnoreCase(serial)) {
+                if (t.isDisponible()) {
+                    t.setDisponible(false);
+                    System.out.println("Tablet prestada correctamente.");
+                } else {
+                    System.out.println("La tablet ya está prestada.");
+                }
+                return;
+            }
+        }
+        System.out.println("Tablet no encontrada.");
+    }
+
+    public void devolverTablet(Queue<ObjTablet> cola, Scanner sc) {
+        System.out.print("Serial de la tablet a devolver: ");
+        String serial = sc.nextLine();
+        for (ObjTablet t : cola) {
+            if (t.getSerial().equalsIgnoreCase(serial)) {
+                if (!t.isDisponible()) {
+                    t.setDisponible(true);
+                    System.out.println("Tablet devuelta correctamente.");
+                } else {
+                    System.out.println("La tablet ya está disponible.");
+                }
+                return;
+            }
+        }
+        System.out.println("Tablet no encontrada.");
+    }
+
+    // ---------------- MÉTODOS COMPUTADOR ----------------
+
+    public Queue<ObjComputador> agregarComputadores(Queue<ObjComputador> cola, Scanner sc) {
+        System.out.print("¿Cuántos computadores deseas agregar? ");
+        int n = sc.nextInt(); sc.nextLine();
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nComputador #" + (i + 1));
+            System.out.print("Serial: ");
+            String serial = sc.nextLine();
+            System.out.print("Marca: ");
+            String marca = sc.nextLine();
+            System.out.print("RAM (GB): ");
+            int ram = sc.nextInt(); sc.nextLine();
+            System.out.print("Disco Duro (GB): ");
+            int discoDuro = sc.nextInt(); sc.nextLine();
+            System.out.print("Precio: ");
+            double precio = sc.nextDouble(); sc.nextLine();
+            System.out.print("Nombre del estudiante: ");
+            String nombre = sc.nextLine();
+            System.out.print("Carnet: ");
+            String carnet = sc.nextLine();
+            System.out.print("¿Disponible? (true/false): ");
+            boolean disponible = sc.nextBoolean(); sc.nextLine();
+
+            ObjComputador c = new ObjComputador(serial, marca, ram, discoDuro, precio, nombre, carnet, disponible);
+            cola.add(c);
+        }
+        return cola;
+    }
+
+    public void mostrarComputadores(Queue<ObjComputador> cola) {
+        if (cola.isEmpty()) {
+            System.out.println("No hay computadores registrados.");
+        } else {
+            for (ObjComputador c : cola) {
+                System.out.println("Serial: " + c.getSerial());
+                System.out.println("Marca: " + c.getMarca());
+                System.out.println("RAM: " + c.getRam() + " GB");
+                System.out.println("Disco Duro: " + c.getDiscoDuro() + " GB");
+                System.out.println("Precio: $" + c.getPrecio());
+                System.out.println("Estudiante: " + c.getNombreEstudiante());
+                System.out.println("Carnet: " + c.getCarnet());
+                System.out.println("Disponible: " + c.isDisponible());
+                System.out.println("---------------------------");
+            }
+        }
+    }
+
+    public void prestarComputador(Queue<ObjComputador> cola, Scanner sc) {
+        System.out.print("Serial del computador a prestar: ");
+        String serial = sc.nextLine();
+        for (ObjComputador c : cola) {
+            if (c.getSerial().equalsIgnoreCase(serial)) {
+                if (c.isDisponible()) {
+                    c.setDisponible(false);
+                    System.out.println("Computador prestado correctamente.");
+                } else {
+                    System.out.println("El computador ya está prestado.");
+                }
+                return;
+            }
+        }
+        System.out.println("Computador no encontrado.");
+    }
+
+    public void devolverComputador(Queue<ObjComputador> cola, Scanner sc) {
+        System.out.print("Serial del computador a devolver: ");
+        String serial = sc.nextLine();
+        for (ObjComputador c : cola) {
+            if (c.getSerial().equalsIgnoreCase(serial)) {
+                if (!c.isDisponible()) {
+                    c.setDisponible(true);
+                    System.out.println("Computador devuelto correctamente.");
+                } else {
+                    System.out.println("El computador ya está disponible.");
+                }
+                return;
+            }
+        }
+        System.out.println("Computador no encontrado.");
+    }
+}
